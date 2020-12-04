@@ -3,11 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+
 
 
 dataset = pd.read_csv('./dataset/student_scores.csv')
-dataset.shape
-dataset.head()
 
 dataset.plot(x='Hours', y='Scores', style='o')
 plt.title('Hours vs Percentage')
@@ -25,3 +25,9 @@ regressor.fit(X_train, y_train)
 
 print("The intercept point is : " + str(regressor.intercept_))
 print("The slope coefficent is : " + str(regressor.coef_))
+
+y_pred = regressor.predict(X_test)
+
+print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
+print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
+print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
